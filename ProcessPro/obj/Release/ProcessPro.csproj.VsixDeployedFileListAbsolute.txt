@@ -10,3 +10,11 @@ C:\Users\larry\AppData\Local\Microsoft\VisualStudio\11.0Exp\Extensions\LarryNung
 C:\Users\larry\AppData\Local\Microsoft\VisualStudio\11.0Exp\Extensions\LarryNung\Process Pro\1.0\Resources\\2013-03-13_003714.jpg
 C:\Users\larry\AppData\Local\Microsoft\VisualStudio\11.0Exp\Extensions\LarryNung\Process Pro\1.0\Resources\\1306142432_running_process.ico
 C:\Users\larry\AppData\Local\Microsoft\VisualStudio\11.0Exp\Extensions\LarryNung\Process Pro\1.0\\ProcessPro.pdb
+C:\Users\larry\AppData\Local\Microsoft\VisualStudio\11.0Exp\Extensions\Larry Nung\Process Pro Extension\1.1\\ProcessPro.dll
+C:\Users\larry\AppData\Local\Microsoft\VisualStudio\11.0Exp\Extensions\Larry Nung\Process Pro Extension\1.1\\System.Windows.Controls.Input.Toolkit.dll
+C:\Users\larry\AppData\Local\Microsoft\VisualStudio\11.0Exp\Extensions\Larry Nung\Process Pro Extension\1.1\\WPFToolkit.dll
+C:\Users\larry\AppData\Local\Microsoft\VisualStudio\11.0Exp\Extensions\Larry Nung\Process Pro Extension\1.1\\ProcessPro.pkgdef
+C:\Users\larry\AppData\Local\Microsoft\VisualStudio\11.0Exp\Extensions\Larry Nung\Process Pro Extension\1.1\\extension.vsixmanifest
+C:\Users\larry\AppData\Local\Microsoft\VisualStudio\11.0Exp\Extensions\Larry Nung\Process Pro Extension\1.1\Resources\\2013-03-13_003714.jpg
+C:\Users\larry\AppData\Local\Microsoft\VisualStudio\11.0Exp\Extensions\Larry Nung\Process Pro Extension\1.1\Resources\\1306142432_running_process.ico
+C:\Users\larry\AppData\Local\Microsoft\VisualStudio\11.0Exp\Extensions\Larry Nung\Process Pro Extension\1.1\\ProcessPro.pdb

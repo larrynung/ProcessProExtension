@@ -45,7 +45,6 @@ C:\Users\larry\Documents\Visual Studio 2012\Projects\ProcessProExtension\Process
 C:\Users\larry\Documents\Visual Studio 2012\Projects\ProcessProExtension\ProcessPro\bin\Release\WPFToolkit.dll
 C:\Users\larry\Documents\Visual Studio 2012\Projects\ProcessProExtension\ProcessPro\bin\Release\System.Windows.Controls.Input.Toolkit.pdb
 C:\Users\larry\Documents\Visual Studio 2012\Projects\ProcessProExtension\ProcessPro\bin\Release\WPFToolkit.pdb
-C:\Users\larry\Documents\Visual Studio 2012\Projects\ProcessProExtension\ProcessPro\obj\Release\ProcessPro.csprojResolveAssemblyReference.cache
 C:\Users\larry\Documents\Visual Studio 2012\Projects\ProcessProExtension\ProcessPro\obj\Release\ProcessPro.csproj.ResolveComReference.cache
 C:\Users\larry\Documents\Visual Studio 2012\Projects\ProcessProExtension\ProcessPro\obj\Release\Src\Class\MyControl.g.cs
 C:\Users\larry\Documents\Visual Studio 2012\Projects\ProcessProExtension\ProcessPro\obj\Release\GeneratedInternalTypeHelper.g.cs
@@ -66,3 +65,4 @@ C:\Users\larry\Documents\Visual Studio 2012\Projects\ProcessProExtension\Process
 C:\Users\larry\Documents\Visual Studio 2012\Projects\ProcessProExtension\ProcessPro\obj\Release\ProcessPro.pkgdef
 C:\Users\larry\Documents\Visual Studio 2012\Projects\ProcessProExtension\ProcessPro\obj\Release\ProcessPro.latest.pkgdef
 C:\Users\larry\Documents\Visual Studio 2012\Projects\ProcessProExtension\ProcessPro\obj\Release\extension.vsixmanifest
+C:\Users\larry\Documents\Visual Studio 2012\Projects\ProcessProExtension\ProcessPro\obj\Release\LevelUp.ProcessPro.Src.Dialog.DetailDialog.resources

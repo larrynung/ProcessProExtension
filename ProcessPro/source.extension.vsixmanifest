@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="57bfc20f-3038-4e9f-8d78-7b1339ce96de" Version="1.0" Language="en-US" Publisher="LarryNung" />
-    <DisplayName>Process Pro</DisplayName>
-    <Description>Help developer attach to running process</Description>
+    <Identity Id="57bfc20f-3038-4e9f-8d78-7b1339ce96de" Version="1.1" Language="en-US" Publisher="Larry Nung" />
+    <DisplayName>Process Pro Extension</DisplayName>
+    <Description xml:space="preserve">Help developer attach to and manage running process easily and quickly</Description>
     <MoreInfo>http://www.dotblogs.com.tw/larrynung</MoreInfo>
     <Icon>Resources\1306142432_running_process.ico</Icon>
     <PreviewImage>Resources\2013-03-13_003714.jpg</PreviewImage>
+    <Tags>Debugger, Attach, Process</Tags>
   </Metadata>
   <Installation InstalledByMsi="false">
     <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="11.0" />
