@@ -59,15 +59,22 @@ public static class ProcessExtension
 
 	private static int GetCpuUsage(int pid)
 	{
-		if (!m_CounterPool.ContainsKey(pid))
+		try
 		{
-			var instanceName = GetProcessInstanceName(pid);
-			if (instanceName == null)
-				return 0;
-			m_CounterPool.Add(pid, new PerformanceCounter(PROCESS_CATEGORY_NAME, "% Processor Time", instanceName));
-		}
+			if (!m_CounterPool.ContainsKey(pid))
+			{
+				var instanceName = GetProcessInstanceName(pid);
+				if (instanceName == null)
+					return 0;
+				m_CounterPool.Add(pid, new PerformanceCounter(PROCESS_CATEGORY_NAME, "% Processor Time", instanceName));
+			}
 
-		return (int)(m_CounterPool[pid].GetNextValue() / Environment.ProcessorCount);
+			return (int)(m_CounterPool[pid].GetNextValue() / Environment.ProcessorCount);
+		}
+		catch (Exception)
+		{
+			return 0;
+		}
 	}
 	#endregion
 
