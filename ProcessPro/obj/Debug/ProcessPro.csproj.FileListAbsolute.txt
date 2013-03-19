@@ -87,3 +87,5 @@ C:\Users\larry\Documents\Visual Studio 2012\Projects\ProcessProExtension\Process
 C:\Users\larry\Documents\Visual Studio 2012\Projects\ProcessProExtension\ProcessPro\obj\Debug\ProcessPro.pkgdef
 C:\Users\larry\Documents\Visual Studio 2012\Projects\ProcessProExtension\ProcessPro\obj\Debug\ProcessPro.latest.pkgdef
 C:\Users\larry\Documents\Visual Studio 2012\Projects\ProcessProExtension\ProcessPro\obj\Debug\extension.vsixmanifest
+C:\Users\larry\Documents\Visual Studio 2012\Projects\ProcessProExtension\ProcessPro\obj\Debug\ProcessPro.csprojResolveAssemblyReference.cache
+C:\Users\larry\Documents\Visual Studio 2012\Projects\ProcessProExtension\ProcessPro\obj\Debug\LevelUp.ProcessPro.Src.Dialog.DetailDialog.resources

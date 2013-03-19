@@ -134,7 +134,14 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Src\Dialog\DetailDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Src\Dialog\DetailDialog.Designer.cs">
+      <DependentUpon>DetailDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Src\Extension\CollectionExtension.cs" />
+    <Compile Include="Src\Extension\ObjectExtension.cs" />
     <Compile Include="Src\Extension\EnumerableExtension.cs" />
     <Compile Include="Src\Class\GridViewSort.cs" />
     <Compile Include="Src\Class\MyControl.xaml.cs">
@@ -144,7 +151,6 @@
     <Compile Include="Src\Class\Guids.cs" />
     <Compile Include="Src\Class\ProcessController.cs" />
     <Compile Include="Src\Class\ProcessData.cs" />
-    <Compile Include="Src\Extension\ProcessExtension.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -154,12 +160,17 @@
     <Compile Include="Src\Class\ProcessProPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Src\Class\PkgCmdID.cs" />
+    <Compile Include="Src\Extension\PerformanceCounterExtension.cs" />
+    <Compile Include="Src\Extension\ProcessExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Src\Dialog\DetailDialog.resx">
+      <DependentUpon>DetailDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VSPackage.resx">
       <MergeWithCTO>true</MergeWithCTO>
@@ -207,6 +218,7 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <UseCodebase>true</UseCodebase>
   </PropertyGroup>

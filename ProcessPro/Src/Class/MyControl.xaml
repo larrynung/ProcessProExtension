@@ -39,6 +39,8 @@
                 <ContextMenu>
                     <MenuItem x:Name="cmiAttachOrDetach" Header="[Attach Or Detach]" Click="MenuItem_Click" Loaded="MenuItem_Loaded"/>
                     <MenuItem x:Name="cmiKill" Header="Kill" Click="Button_Click_2"/>
+                    <Separator/>
+                    <MenuItem Header="Detail" Click="MenuItem_Click_1"/>
                 </ContextMenu>
             </ListView.ContextMenu>
             <ListView.View>
