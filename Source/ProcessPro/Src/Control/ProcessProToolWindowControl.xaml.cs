@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 
 namespace LevelUp.ProcessPro
@@ -36,7 +37,7 @@ namespace LevelUp.ProcessPro
 		{
 			get
 			{
-				return _arrawCursor ?? (_arrawCursor = new Cursor(new System.IO.MemoryStream(LevelUp.ProcessPro.Resources.arrow)));
+				return _arrawCursor ?? (_arrawCursor = WinFXCursorFromBitmap.CreateCursor(LevelUp.ProcessPro.Resources.arrow));
 			}
 		}
 
@@ -88,13 +89,13 @@ namespace LevelUp.ProcessPro
 
 		private void Button_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
-			imgArrow.Source = this.Resources["DraggedSpyArrow"] as BitmapImage;
+			imgArrow.Source = null;
 			Cursor = m_ArrawCursor;
 		}
 
 		private void Button_PreviewMouseUp(object sender, MouseButtonEventArgs e)
 		{
-			imgArrow.Source = this.Resources["NormalSpyArrow"] as BitmapImage;
+			imgArrow.Source = this.Resources["Arrow"] as BitmapImage;
 			Cursor = Cursors.Arrow;
 
 			AttachPointProcess();

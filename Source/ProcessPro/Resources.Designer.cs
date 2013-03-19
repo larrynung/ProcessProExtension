@@ -81,12 +81,12 @@ namespace LevelUp.ProcessPro {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static byte[] arrow {
+        internal static System.Drawing.Bitmap arrow {
             get {
                 object obj = ResourceManager.GetObject("arrow", resourceCulture);
-                return ((byte[])(obj));
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -106,26 +106,6 @@ namespace LevelUp.ProcessPro {
             get {
                 object obj = ResourceManager.GetObject("debugger_32x32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon SPYXX {
-            get {
-                object obj = ResourceManager.GetObject("SPYXX", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon SPYXX1 {
-            get {
-                object obj = ResourceManager.GetObject("SPYXX1", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
             }
         }
         
