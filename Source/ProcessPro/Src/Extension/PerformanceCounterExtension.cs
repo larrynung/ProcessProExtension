@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 public static class PerformanceCounterExtension
 {
@@ -12,7 +9,7 @@ public static class PerformanceCounterExtension
 	private static Dictionary<PerformanceCounter, float> _valuePool;
 	#endregion
 
-	
+
 	#region Private Static Property
 	private static Dictionary<PerformanceCounter, DateTime> m_UpdateTimePool
 	{
@@ -47,6 +44,6 @@ public static class PerformanceCounterExtension
 		}
 
 		return m_ValuePool[counter];
-	} 
+	}
 	#endregion
 }

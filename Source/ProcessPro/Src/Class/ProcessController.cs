@@ -1,11 +1,8 @@
 ﻿using EnvDTE;
 using Microsoft.VisualStudio.Shell;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LevelUp.ProcessPro
@@ -13,8 +10,8 @@ namespace LevelUp.ProcessPro
 	public class ProcessController
 	{
 		#region Static Var
-        private static ProcessController _instance;
-        #endregion
+		private static ProcessController _instance;
+		#endregion
 
 		#region Var
 		private ObservableCollection<ProcessData> _processes;
@@ -28,7 +25,7 @@ namespace LevelUp.ProcessPro
 		/// <value>
 		/// The m_ auto update timer.
 		/// </value>
-		public Timer m_AutoUpdateTimer 
+		public Timer m_AutoUpdateTimer
 		{
 			get
 			{
@@ -48,13 +45,13 @@ namespace LevelUp.ProcessPro
 		/// The instance.
 		/// </value>
 		public static ProcessController Instance
-        { 
-            get
-            {
-                return _instance ?? (_instance = new ProcessController());
-            }
-        }
-        #endregion
+		{
+			get
+			{
+				return _instance ?? (_instance = new ProcessController());
+			}
+		}
+		#endregion
 
 
 		#region Public Property
@@ -65,15 +62,15 @@ namespace LevelUp.ProcessPro
 		/// The auto update interval.
 		/// </value>
 		public int AutoUpdateInterval
-		{ 
-			get 
+		{
+			get
 			{
 				return m_AutoUpdateTimer.Interval;
-			} 
+			}
 			set
 			{
 				m_AutoUpdateTimer.Interval = value;
-			} 
+			}
 		}
 
 		/// <summary>
@@ -82,7 +79,7 @@ namespace LevelUp.ProcessPro
 		/// <value>
 		/// The enable auto update.
 		/// </value>
-		public Boolean EnableAutoUpdate 
+		public Boolean EnableAutoUpdate
 		{
 			get
 			{
@@ -120,10 +117,10 @@ namespace LevelUp.ProcessPro
 		/// Prevents a default instance of the <see cref="ProcessController" /> class from being created.
 		/// </summary>
 		private ProcessController()
-        {
+		{
 			m_AutoUpdateTimer.Tick += m_AutoUpdateTimer_Tick;
-        }
-        #endregion
+		}
+		#endregion
 
 
 		#region Public Method
@@ -162,7 +159,7 @@ namespace LevelUp.ProcessPro
 			{
 				if ((DateTime.Now - m_LastUpdate).TotalSeconds < 1)
 					return;
-				
+
 				var currentProcesses = System.Diagnostics.Process.GetProcesses();
 				var currentProcessDatas = currentProcesses.Select(p => new ProcessData(p));
 

@@ -1,38 +1,29 @@
 ﻿using EnvDTE;
 using LevelUp.ProcessPro.Src.Dialog;
-using Microsoft.VisualStudio.Shell;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace LevelUp.ProcessPro
 {
-    /// <summary>
-    /// Interaction logic for MyControl.xaml
-    /// </summary>
-    public partial class MyControl : UserControl
-    {
+	/// <summary>
+	/// Interaction logic for MyControl.xaml
+	/// </summary>
+	public partial class MyControl : UserControl
+	{
 		#region DllImport
 		[DllImport("user32.dll")]
 		static extern IntPtr WindowFromPoint(System.Drawing.Point point);
 		#endregion
 
-		public ObservableCollection<ProcessData> Processes 
+		public ObservableCollection<ProcessData> Processes
 		{
 			get
 			{
@@ -43,7 +34,7 @@ namespace LevelUp.ProcessPro
 		Cursor _arrawCursor;
 		public Cursor m_ArrawCursor
 		{
-			get 
+			get
 			{
 				return _arrawCursor ?? (_arrawCursor = new Cursor(new System.IO.MemoryStream(LevelUp.ProcessPro.Resources.arrow)));
 			}
@@ -58,19 +49,19 @@ namespace LevelUp.ProcessPro
 			}
 		}
 
-        public MyControl()
-        {
-            InitializeComponent();
-        }
+		public MyControl()
+		{
+			InitializeComponent();
+		}
 
 		private void MyToolWindow_Loaded(object sender, RoutedEventArgs e)
 		{
 			ProcessController.Instance.AutoUpdateInterval = 1000;
 			ProcessController.Instance.EnableAutoUpdate = true;
-			
+
 			lvProcesses.Items.Filter = delegate(object item)
 			{
-				if(tbxFilter.Text.Length == 0)
+				if (tbxFilter.Text.Length == 0)
 					return true;
 
 				var processData = item as ProcessData;
@@ -203,7 +194,7 @@ namespace LevelUp.ProcessPro
 		{
 			if (lvProcesses.SelectedItem == null)
 			{
-				cmiAttachOrDetach.Visibility =  System.Windows.Visibility.Collapsed;
+				cmiAttachOrDetach.Visibility = System.Windows.Visibility.Collapsed;
 				cmiKill.Visibility = System.Windows.Visibility.Collapsed;
 				return;
 			}
@@ -237,5 +228,5 @@ namespace LevelUp.ProcessPro
 			dialog.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			dialog.ShowDialog();
 		}
-    }
+	}
 }

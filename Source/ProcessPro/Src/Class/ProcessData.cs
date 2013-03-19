@@ -1,19 +1,14 @@
 ﻿using EnvDTE;
 using Microsoft.VisualStudio.Shell;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LevelUp.ProcessPro
 {
 	public class ProcessData : IDisposable
 	{
 		#region Var
-		private String _owner; 
+		private String _owner;
 		private Boolean _attached;
 		private System.Diagnostics.Process _process;
 		private int _id;
@@ -25,9 +20,9 @@ namespace LevelUp.ProcessPro
 		#region Private Property
 		public Boolean m_IsDisposing { get; set; }
 
-		private System.Diagnostics.Process m_Process 
+		private System.Diagnostics.Process m_Process
 		{
-			get 
+			get
 			{
 				return _process;
 			}
@@ -42,9 +37,9 @@ namespace LevelUp.ProcessPro
 		#endregion
 
 		#region Public Property
-		public int ID 
+		public int ID
 		{
-			get 
+			get
 			{
 				if (m_Process != null)
 					_id = m_Process.Id;
@@ -80,7 +75,7 @@ namespace LevelUp.ProcessPro
 			}
 		}
 
-		public String Owner 
+		public String Owner
 		{
 			get
 			{
@@ -104,7 +99,7 @@ namespace LevelUp.ProcessPro
 			}
 		}
 
-		public int ThreadCount 
+		public int ThreadCount
 		{
 			get
 			{
@@ -112,7 +107,7 @@ namespace LevelUp.ProcessPro
 			}
 		}
 
-		public Boolean Attached 
+		public Boolean Attached
 		{
 			get
 			{
@@ -123,7 +118,7 @@ namespace LevelUp.ProcessPro
 			{
 				if (_attached == value)
 					return;
-				
+
 				_attached = value;
 				OnAttachedChanged(EventArgs.Empty);
 			}
@@ -131,7 +126,7 @@ namespace LevelUp.ProcessPro
 
 		public long PrivateMemorySize
 		{
-			get 
+			get
 			{
 				return m_Process.PrivateMemorySize;
 			}
@@ -145,7 +140,7 @@ namespace LevelUp.ProcessPro
 
 		#region Constructor
 		public ProcessData(int processID)
-			:this(System.Diagnostics.Process.GetProcessById(processID))
+			: this(System.Diagnostics.Process.GetProcessById(processID))
 		{
 		}
 
@@ -169,7 +164,7 @@ namespace LevelUp.ProcessPro
 			var dte = (DTE)Package.GetGlobalService(typeof(DTE));
 
 			Attached = dte.Debugger.DebuggedProcesses != null && dte.Debugger.DebuggedProcesses.OfType<EnvDTE.Process>().Any(p => p.ProcessID == ID);
-		} 
+		}
 		#endregion
 
 
@@ -227,7 +222,7 @@ namespace LevelUp.ProcessPro
 			var data = obj as ProcessData;
 			if (data == null)
 				return false;
-			
+
 			return this.ID.Equals(data.ID);
 		}
 
