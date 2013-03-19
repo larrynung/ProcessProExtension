@@ -79,7 +79,7 @@ namespace LevelUp.ProcessPro
 
 		void m_AutoUpdateTimer_Tick(object sender, EventArgs e)
 		{
-			Update();
+			Update(true);
 		}
 
 		private void lvProcesses_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -159,10 +159,12 @@ namespace LevelUp.ProcessPro
 			Update();
 		}
 
-		private void Update()
+		private void Update(Boolean updateProcessList = false)
 		{
-			ProcessController.Instance.UpdateProcesses();
 			CollectionViewSource.GetDefaultView(Processes).Refresh();
+
+			if (updateProcessList)
+				ProcessController.Instance.UpdateProcesses();
 		}
 
 		private void Button_Click_2(object sender, RoutedEventArgs e)
