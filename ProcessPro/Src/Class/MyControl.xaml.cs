@@ -1,4 +1,5 @@
 ﻿using EnvDTE;
+using LevelUp.ProcessPro.Src.Dialog;
 using Microsoft.VisualStudio.Shell;
 using System;
 using System.Collections.Generic;
@@ -224,6 +225,17 @@ namespace LevelUp.ProcessPro
 		private void tbxFilter_TextChanged(object sender, RoutedEventArgs e)
 		{
 			Update();
+		}
+
+		private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+		{
+			if (lvProcesses.SelectedItem == null)
+				return;
+
+			var selectedProcess = lvProcesses.SelectedItem as ProcessData;
+			var dialog = new DetailDialog(System.Diagnostics.Process.GetProcessById(selectedProcess.ID));
+			dialog.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+			dialog.ShowDialog();
 		}
     }
 }

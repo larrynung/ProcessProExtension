@@ -10,13 +10,11 @@ using System.Threading.Tasks;
 
 namespace LevelUp.ProcessPro
 {
-	public class ProcessData : IDisposable, INotifyPropertyChanged
+	public class ProcessData : IDisposable
 	{
 		#region Var
 		private String _owner; 
 		private Boolean _attached;
-		private PerformanceCounter _counter;
-		private int _cpu;
 		private System.Diagnostics.Process _process;
 		private int _id;
 		private String _name;
@@ -38,28 +36,7 @@ namespace LevelUp.ProcessPro
 				if (_process == value)
 					return;
 
-				//try
-				//{
-				//	if (_process != null && !_process.HasExited)
-				//	{
-				//		_process.Dispose();
-				//	}
-				//}
-				//catch (Exception)
-				//{
-				//}
-
 				_process = value;
-			}
-		}
-
-		private DateTime m_CPULastUpdate { get; set; }
-		
-		private PerformanceCounter m_Counter
-		{
-			get 
-			{
-				return _counter ?? (_counter = new PerformanceCounter("Process", "% Processor Time", GetProcessInstanceName(this.ID)));
 			}
 		}
 		#endregion
@@ -95,6 +72,14 @@ namespace LevelUp.ProcessPro
 			}
 		}
 
+		public IntPtr MainWindowHandle
+		{
+			get
+			{
+				return m_Process.MainWindowHandle;
+			}
+		}
+
 		public String Owner 
 		{
 			get
@@ -115,16 +100,7 @@ namespace LevelUp.ProcessPro
 		{
 			get
 			{
-				UpdateCpuUsage();
-				return _cpu;
-			}
-			private set
-			{
-				if (_cpu == value)
-					return;
-
-				_cpu = value;
-				NotifyPropertyChanged("CPU");
+				return m_Process.GetCpuUsage();
 			}
 		}
 
@@ -152,12 +128,19 @@ namespace LevelUp.ProcessPro
 				OnAttachedChanged(EventArgs.Empty);
 			}
 		}
+
+		public long PrivateMemorySize
+		{
+			get 
+			{
+				return m_Process.PrivateMemorySize;
+			}
+		}
 		#endregion
 
 		#region Event
 		public event EventHandler AttachedChanged;
 		public event EventHandler Exited;
-		public event PropertyChangedEventHandler PropertyChanged;
 		#endregion
 
 		#region Constructor
@@ -181,56 +164,6 @@ namespace LevelUp.ProcessPro
 
 
 		#region Private Method
-		private void NotifyPropertyChanged(String info)
-		{
-			if (PropertyChanged != null)
-			{
-				PropertyChanged(this, new PropertyChangedEventArgs(info));
-			}
-		}
-
-		private string GetProcessInstanceName(int pid)
-		{
-			PerformanceCounterCategory cat = new PerformanceCounterCategory("Process");
-
-			string[] instances = cat.GetInstanceNames();
-			foreach (string instance in instances)
-			{
-
-				using (PerformanceCounter cnt = new PerformanceCounter("Process",
-					 "ID Process", instance, true))
-				{
-					int val = (int)cnt.RawValue;
-					if (val == pid)
-					{
-						return instance;
-					}
-				}
-			}
-			return Name;
-		}
-
-		private void UpdateCpuUsage()
-		{
-			lock (this)
-			{
-				try
-				{
-					var interval = DateTime.Now - m_CPULastUpdate;
-					if (interval.TotalSeconds > 1)
-					{
-						var counterValue = m_Counter.NextValue();
-						var cpuUsage = (int)(counterValue / Environment.ProcessorCount);
-						_cpu = cpuUsage;
-						m_CPULastUpdate = DateTime.Now;
-					}
-				}
-				catch (Exception)
-				{
-				}
-			}
-		}
-
 		private void UpdateAttachStatus()
 		{
 			var dte = (DTE)Package.GetGlobalService(typeof(DTE));
@@ -270,7 +203,6 @@ namespace LevelUp.ProcessPro
 		#region Public Method
 		public void Update()
 		{
-			UpdateCpuUsage();
 			UpdateAttachStatus();
 		}
 
