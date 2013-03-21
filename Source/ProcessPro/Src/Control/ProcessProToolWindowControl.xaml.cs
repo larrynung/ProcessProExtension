@@ -9,8 +9,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Interop;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace LevelUp.ProcessPro
 {
@@ -41,12 +41,12 @@ namespace LevelUp.ProcessPro
 			}
 		}
 
-		private System.Windows.Forms.Timer _autoUpdateTimer;
-		public System.Windows.Forms.Timer m_AutoUpdateTimer
+		private DispatcherTimer _autoUpdateTimer;
+		public DispatcherTimer m_AutoUpdateTimer
 		{
 			get
 			{
-				return _autoUpdateTimer ?? (_autoUpdateTimer = new System.Windows.Forms.Timer());
+				return _autoUpdateTimer ?? (_autoUpdateTimer = new DispatcherTimer());
 			}
 		}
 
@@ -57,9 +57,6 @@ namespace LevelUp.ProcessPro
 
 		private void MyToolWindow_Loaded(object sender, RoutedEventArgs e)
 		{
-			ProcessController.Instance.AutoUpdateInterval = 1000;
-			ProcessController.Instance.EnableAutoUpdate = true;
-
 			lvProcesses.Items.Filter = delegate(object item)
 			{
 				if (tbxFilter.Text.Length == 0)
@@ -72,14 +69,17 @@ namespace LevelUp.ProcessPro
 					|| regex.IsMatch(processData.Title);
 			};
 
-			m_AutoUpdateTimer.Interval = 1000;
+			m_AutoUpdateTimer.Interval = TimeSpan.FromMilliseconds(1500);
 			m_AutoUpdateTimer.Tick += m_AutoUpdateTimer_Tick;
 			m_AutoUpdateTimer.Start();
+
+			ProcessController.Instance.AutoUpdateInterval = 5000;
+			ProcessController.Instance.EnableAutoUpdate = true;
 		}
 
 		void m_AutoUpdateTimer_Tick(object sender, EventArgs e)
 		{
-			Update(true);
+			Update();
 		}
 
 		private void lvProcesses_MouseDoubleClick(object sender, MouseButtonEventArgs e)

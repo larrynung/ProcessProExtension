@@ -186,7 +186,7 @@ namespace LevelUp.ProcessPro
 					p.Exited -= p_Exited;
 				});
 
-				Processes.ForEach(p => p.Update());
+				//Processes.ForEach(p => p.Update());
 
 				m_LastUpdate = DateTime.Now;
 			}
@@ -208,7 +208,7 @@ namespace LevelUp.ProcessPro
 				{
 					process.Attach();
 
-					Processes.Single(p => p.ID == processID).Update();
+					//Processes.Single(p => p.ID == processID).Update();
 					return;
 				}
 			}
@@ -229,7 +229,7 @@ namespace LevelUp.ProcessPro
 				{
 					process.Detach(false);
 
-					Processes.Single(p => p.ID == processID).Update();
+					//Processes.Single(p => p.ID == processID).Update();
 					return;
 				}
 			}
