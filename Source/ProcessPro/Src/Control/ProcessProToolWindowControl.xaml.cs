@@ -212,18 +212,26 @@ namespace LevelUp.ProcessPro
 
 		private void MenuItem_Loaded(object sender, RoutedEventArgs e)
 		{
+			cmiAttachOrDetach.Visibility = lvProcesses.SelectedItem == null ?
+				Visibility.Collapsed :
+				Visibility.Visible;
+
+			cmiKill.Visibility = cmiAttachOrDetach.Visibility;
+
+			cmSeperater1.Visibility = cmiKill.Visibility;
+
+			cmDetail.Visibility = lvProcesses.SelectedItems.Count == 1 ?
+				Visibility.Visible : 
+				Visibility.Collapsed;
+
+			cmSeperater2.Visibility = cmDetail.Visibility;
+
 			if (lvProcesses.SelectedItem == null)
-			{
-				cmiAttachOrDetach.Visibility = System.Windows.Visibility.Collapsed;
-				cmiKill.Visibility = System.Windows.Visibility.Collapsed;
 				return;
-			}
 
 			var selectedProcess = lvProcesses.SelectedItem as ProcessData;
 			cmiAttachOrDetach.Header = selectedProcess.Attached ? "Detach" : "Attach";
-			cmiAttachOrDetach.Visibility = System.Windows.Visibility.Visible;
 
-			cmiKill.Visibility = System.Windows.Visibility.Visible;
 		}
 
 		private void autoCompleteBox1_Populating(object sender, PopulatingEventArgs e)
@@ -247,6 +255,11 @@ namespace LevelUp.ProcessPro
 			var dialog = new DetailDialog(System.Diagnostics.Process.GetProcessById(selectedProcess.ID));
 			dialog.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			dialog.ShowDialog();
+		}
+
+		private void cmdSellectAll_Click(object sender, RoutedEventArgs e)
+		{
+			lvProcesses.SelectAll();
 		}
 	}
 }

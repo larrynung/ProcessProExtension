@@ -55,8 +55,10 @@
                 <ContextMenu>
                     <MenuItem x:Name="cmiAttachOrDetach" Header="[Attach Or Detach]" Click="MenuItem_Click" Loaded="MenuItem_Loaded"/>
                     <MenuItem x:Name="cmiKill" Header="Kill" Click="Button_Click_2"/>
-                    <Separator/>
-                    <MenuItem Header="Detail" Click="MenuItem_Click_1"/>
+                    <Separator x:Name="cmSeperater1"/>
+                    <MenuItem x:Name="cmdSellectAll" Header="Select All" Click="cmdSellectAll_Click"/>
+                    <Separator x:Name="cmSeperater2"/>
+                    <MenuItem x:Name="cmDetail" Header="Detail" Click="MenuItem_Click_1"/>
                 </ContextMenu>
             </ListView.ContextMenu>
             <ListView.View>
