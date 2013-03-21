@@ -56,6 +56,7 @@
     <Reference Include="Microsoft.VisualStudio.Shell.11.0" />
     <Reference Include="Microsoft.VisualStudio.Shell.Immutable.10.0" />
     <Reference Include="Microsoft.VisualStudio.Shell.Immutable.11.0" />
+    <Reference Include="PresentationFramework.Aero" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -140,6 +141,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Src\Class\WinFXCursorFromBitmap.cs" />
+    <Compile Include="Src\Control\WaterMarkTextBox.cs" />
     <Compile Include="Src\Dialog\DetailDialog.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:util="clr-namespace:Wpf.Util"
              xmlns:my="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
+             xmlns:local="clr-namespace:WaterMarkTextBox"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
               DataContext="{Binding RelativeSource={RelativeSource Self}}"
@@ -13,6 +14,12 @@
         <BitmapImage x:Key="Refresh" UriSource="/ProcessPro;component/Resources/view-refresh_32x32.png"/>
         <BitmapImage x:Key="Debug" UriSource="/ProcessPro;component/Resources/debugger_32x32.png"/>
         <BitmapImage x:Key="Arrow" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="/ProcessPro;component/Resources/arrow.png"/>
+        <local:Helper x:Key="Helper" />
+        <Style x:Key="EntryFieldStyle" TargetType="Grid" >
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="20,0" />
+        </Style>
     </UserControl.Resources>
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
@@ -29,7 +36,17 @@
             </ToolBar>
         </ToolBarTray>
 
-        <my:AutoCompleteBox Name="tbxFilter" DockPanel.Dock="Top" Populating="autoCompleteBox1_Populating" TextChanged="tbxFilter_TextChanged"/>
+        <Grid DockPanel.Dock="Top">
+            <TextBlock Margin="5,2" Text="Filter your processes" Foreground="LightGray">
+                <TextBlock.Visibility>
+                    <MultiBinding Converter="{StaticResource Helper}">
+                        <Binding ElementName="tbxFilter" Path="Text.IsEmpty" />
+                        <Binding ElementName="tbxFilter" Path="IsFocused" />
+                    </MultiBinding>
+                </TextBlock.Visibility>
+            </TextBlock>
+            <my:AutoCompleteBox Name="tbxFilter" Background="Transparent" Populating="autoCompleteBox1_Populating" TextChanged="tbxFilter_TextChanged"/>
+        </Grid>
 
         <ListView x:Name="lvProcesses" ItemsSource="{Binding Processes}" 
                    util:GridViewSort.AutoSort="True"
