@@ -19,6 +19,11 @@ namespace LevelUp.ProcessPro
 	/// </summary>
 	public partial class MyControl : UserControl
 	{
+		#region Const
+		const string FILTER_REPLACE_PATTERN = @"(?<!""[^""\s]+)([,;\s]|and)+(?![^""\s]+"")"; 
+		const string FILTER_REPLACE_SEPERATER = @"|";
+		#endregion
+
 		#region DllImport
 		[DllImport("user32.dll")]
 		static extern IntPtr WindowFromPoint(System.Drawing.Point point);
@@ -59,14 +64,26 @@ namespace LevelUp.ProcessPro
 		{
 			lvProcesses.Items.Filter = delegate(object item)
 			{
-				if (tbxFilter.Text.Length == 0)
-					return true;
+				try
+				{
+					if (tbxFilter.Text.Length == 0)
+						return true;
 
-				var processData = item as ProcessData;
+					var processData = item as ProcessData;
 
-				var regex = new Regex(string.Format("({0})", tbxFilter.Text.Replace(',', '|')));
-				return regex.IsMatch(processData.Name)
-					|| regex.IsMatch(processData.Title);
+
+					var filterPattern = Regex.Replace(tbxFilter.Text, FILTER_REPLACE_PATTERN, FILTER_REPLACE_SEPERATER).Trim(FILTER_REPLACE_SEPERATER[0]);
+					var regex = new Regex(filterPattern, 
+						RegexOptions.IgnorePatternWhitespace |
+						RegexOptions.IgnorePatternWhitespace);
+
+					return regex.IsMatch(processData.Name)
+						|| regex.IsMatch(processData.Title);
+				}
+				catch (Exception)
+				{
+					return false;
+				}
 			};
 
 			m_AutoUpdateTimer.Interval = TimeSpan.FromMilliseconds(1500);
