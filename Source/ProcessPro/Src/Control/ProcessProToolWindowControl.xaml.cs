@@ -258,5 +258,20 @@ namespace LevelUp.ProcessPro
 		{
 			lvProcesses.SelectAll();
 		}
+
+		private void Button_Click(object sender, RoutedEventArgs e)
+		{
+			lvProcesses.SelectAll();
+		}
+
+		private void Button_Click_1(object sender, RoutedEventArgs e)
+		{
+			AttachSelectedProcess();
+		}
+
+		private void Button_Click_3(object sender, RoutedEventArgs e)
+		{
+			DetachSelectedProcess();
+		}
 	}
 }

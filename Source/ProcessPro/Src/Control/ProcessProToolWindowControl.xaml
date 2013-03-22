@@ -19,6 +19,9 @@
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Margin" Value="20,0" />
         </Style>
+        <BitmapImage x:Key="SelectAll" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="/ProcessPro;component/Resources/appbar.list.check.png"/>
+        <BitmapImage x:Key="Attach" UriSource="/ProcessPro;component/Resources/appbar.bug.png"/>
+        <BitmapImage x:Key="Detach" UriSource="/ProcessPro;component/Resources/appbar.bug.remove.png"/>
     </UserControl.Resources>
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
@@ -27,6 +30,16 @@
                     <Image x:Name="imgArrow" Height="28" Width="28" ToolTip="Attach to specified process" Source="{DynamicResource Arrow}"/>
                 </Button>
                 <Separator/>
+                <Button Click="Button_Click">
+                    <Image Height="32" Width="32" ToolTip="Select all processes" Source="{DynamicResource SelectAll}"/>
+                </Button>
+                <Separator/>
+                <Button Click="Button_Click_1">
+                    <Image Height="32" Width="32" ToolTip="Attach selected processes" Source="{DynamicResource Attach}"/>
+                </Button>
+                <Button Click="Button_Click_3">
+                    <Image Height="32" Width="32" ToolTip="Detach selected processes" Source="{DynamicResource Detach}"/>
+                </Button>
             </ToolBar>
         </ToolBarTray>
 
@@ -50,7 +63,7 @@
                   util:GridViewSort.AutoSort="True"
                   HorizontalContentAlignment="Stretch"
                   MouseDoubleClick="lvProcesses_MouseDoubleClick">
-            
+
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem x:Name="cmiAttachOrDetach" Header="[Attach Or Detach]" Click="MenuItem_Click" Loaded="MenuItem_Loaded"/>

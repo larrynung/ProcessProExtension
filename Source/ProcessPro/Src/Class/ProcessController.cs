@@ -160,7 +160,12 @@ namespace LevelUp.ProcessPro
 				return;
 
 			var dte = (DTE)Package.GetGlobalService(typeof(DTE));
-			foreach (EnvDTE.Process process in dte.Debugger.DebuggedProcesses)
+			var debuggedProcesses = dte.Debugger.DebuggedProcesses;
+
+			if (debuggedProcesses == null)
+				return;
+
+			foreach (EnvDTE.Process process in debuggedProcesses)
 			{
 				if (process.ProcessID == processID)
 				{

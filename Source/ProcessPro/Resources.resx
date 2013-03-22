@@ -124,9 +124,6 @@
     <value>Process Pro</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="debugger_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\debugger_32x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="_1306142432_running_process" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\1306142432_running_process.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -135,5 +132,17 @@
   </data>
   <data name="arrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\arrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="appbar_bug" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\appbar.bug.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="appbar_bug_remove" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\appbar.bug.remove.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="appbar_list_check" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\appbar.list.check.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="debugger_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\debugger_32x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
