@@ -90,8 +90,10 @@ namespace LevelUp.ProcessPro
 			m_AutoUpdateTimer.Tick += m_AutoUpdateTimer_Tick;
 			m_AutoUpdateTimer.Start();
 
-			ProcessController.Instance.AutoUpdateInterval = 5000;
+			ProcessController.Instance.AutoUpdateInterval = TimeSpan.FromSeconds(5);
 			ProcessController.Instance.EnableAutoUpdate = true;
+
+			Update(true);
 		}
 
 		void m_AutoUpdateTimer_Tick(object sender, EventArgs e)
@@ -169,11 +171,6 @@ namespace LevelUp.ProcessPro
 			var selectedProcesses = lvProcesses.SelectedItems.OfType<ProcessData>();
 
 			selectedProcesses.ForEach(p => ProcessController.Instance.DetachProcess(p.ID));
-		}
-
-		private void Button_Click_1(object sender, RoutedEventArgs e)
-		{
-			Update();
 		}
 
 		private void Update(Boolean updateProcessList = false)

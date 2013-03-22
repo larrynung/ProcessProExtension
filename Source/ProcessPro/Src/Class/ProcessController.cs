@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.Shell;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Forms;
+using System.Windows.Threading;
 
 namespace LevelUp.ProcessPro
 {
@@ -14,8 +14,8 @@ namespace LevelUp.ProcessPro
 		#endregion
 
 		#region Var
+		private DispatcherTimer _autoUpdateTimer;
 		private ObservableCollection<ProcessData> _processes;
-		private Timer _autoUpdateTimer;
 		#endregion
 
 		#region Private Property
@@ -25,11 +25,11 @@ namespace LevelUp.ProcessPro
 		/// <value>
 		/// The m_ auto update timer.
 		/// </value>
-		public Timer m_AutoUpdateTimer
+		public DispatcherTimer m_AutoUpdateTimer
 		{
 			get
 			{
-				return _autoUpdateTimer ?? (_autoUpdateTimer = new Timer());
+				return _autoUpdateTimer ?? (_autoUpdateTimer = new DispatcherTimer());
 			}
 		}
 
@@ -61,7 +61,7 @@ namespace LevelUp.ProcessPro
 		/// <value>
 		/// The auto update interval.
 		/// </value>
-		public int AutoUpdateInterval
+		public TimeSpan AutoUpdateInterval
 		{
 			get
 			{
@@ -83,11 +83,11 @@ namespace LevelUp.ProcessPro
 		{
 			get
 			{
-				return m_AutoUpdateTimer.Enabled;
+				return m_AutoUpdateTimer.IsEnabled;
 			}
 			set
 			{
-				m_AutoUpdateTimer.Enabled = value;
+				m_AutoUpdateTimer.IsEnabled = value;
 			}
 		}
 
@@ -104,7 +104,7 @@ namespace LevelUp.ProcessPro
 				if (_processes == null)
 				{
 					_processes = new ObservableCollection<ProcessData>();
-					UpdateProcesses();
+					//UpdateProcesses();
 				}
 				return _processes;
 			}
@@ -124,11 +124,59 @@ namespace LevelUp.ProcessPro
 
 
 		#region Public Method
+		public static void DetachAllProcess()
+		{
+			var dte = (DTE)Package.GetGlobalService(typeof(DTE));
+			dte.Debugger.DetachAll();
+		}
+
+		public void AttachProcess(int processID)
+		{
+			if (processID == 0)
+				return;
+
+			if (processID == System.Diagnostics.Process.GetCurrentProcess().Id)
+				return;
+
+			var dte = (DTE)Package.GetGlobalService(typeof(DTE));
+			foreach (EnvDTE.Process process in dte.Debugger.LocalProcesses)
+			{
+				if (process.ProcessID == processID)
+				{
+					process.Attach();
+
+					//Processes.Single(p => p.ID == processID).Update();
+					return;
+				}
+			}
+		}
+
+		public void DetachProcess(int processID)
+		{
+			if (processID == 0)
+				return;
+
+			if (processID == System.Diagnostics.Process.GetCurrentProcess().Id)
+				return;
+
+			var dte = (DTE)Package.GetGlobalService(typeof(DTE));
+			foreach (EnvDTE.Process process in dte.Debugger.DebuggedProcesses)
+			{
+				if (process.ProcessID == processID)
+				{
+					process.Detach(false);
+
+					//Processes.Single(p => p.ID == processID).Update();
+					return;
+				}
+			}
+		}
+
 		/// <summary>
 		/// Starts the auto update.
 		/// </summary>
 		/// <param name="interval">The interval.</param>
-		public void StartAutoUpdate(int interval)
+		public void StartAutoUpdate(TimeSpan interval)
 		{
 			this.AutoUpdateInterval = interval;
 			StartAutoUpdate();
@@ -190,55 +238,6 @@ namespace LevelUp.ProcessPro
 
 				m_LastUpdate = DateTime.Now;
 			}
-		}
-
-
-		public void AttachProcess(int processID)
-		{
-			if (processID == 0)
-				return;
-
-			if (processID == System.Diagnostics.Process.GetCurrentProcess().Id)
-				return;
-
-			var dte = (DTE)Package.GetGlobalService(typeof(DTE));
-			foreach (EnvDTE.Process process in dte.Debugger.LocalProcesses)
-			{
-				if (process.ProcessID == processID)
-				{
-					process.Attach();
-
-					//Processes.Single(p => p.ID == processID).Update();
-					return;
-				}
-			}
-		}
-
-		public void DetachProcess(int processID)
-		{
-			if (processID == 0)
-				return;
-
-			if (processID == System.Diagnostics.Process.GetCurrentProcess().Id)
-				return;
-
-			var dte = (DTE)Package.GetGlobalService(typeof(DTE));
-			foreach (EnvDTE.Process process in dte.Debugger.DebuggedProcesses)
-			{
-				if (process.ProcessID == processID)
-				{
-					process.Detach(false);
-
-					//Processes.Single(p => p.ID == processID).Update();
-					return;
-				}
-			}
-		}
-
-		public static void DetachAllProcess()
-		{
-			var dte = (DTE)Package.GetGlobalService(typeof(DTE));
-			dte.Debugger.DetachAll();
 		}
 		#endregion
 

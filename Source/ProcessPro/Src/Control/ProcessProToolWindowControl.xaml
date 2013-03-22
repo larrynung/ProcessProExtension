@@ -11,7 +11,6 @@
               DataContext="{Binding RelativeSource={RelativeSource Self}}"
              Name="MyToolWindow" Loaded="MyToolWindow_Loaded">
     <UserControl.Resources>
-        <BitmapImage x:Key="Refresh" UriSource="/ProcessPro;component/Resources/view-refresh_32x32.png"/>
         <BitmapImage x:Key="Debug" UriSource="/ProcessPro;component/Resources/debugger_32x32.png"/>
         <BitmapImage x:Key="Arrow" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="/ProcessPro;component/Resources/arrow.png"/>
         <local:Helper x:Key="Helper" />
@@ -27,12 +26,7 @@
                 <Button PreviewMouseLeftButtonDown="Button_PreviewMouseLeftButtonDown" PreviewMouseUp="Button_PreviewMouseUp">
                     <Image x:Name="imgArrow" Height="28" Width="28" ToolTip="Attach to specified process" Source="{DynamicResource Arrow}"/>
                 </Button>
-                <!--<Button>
-                    <Image Height="16" Width="16" Source="{DynamicResource Stop}"/>
-                </Button>-->
-                <Button Click="Button_Click_1">
-                    <Image Height="16" Width="16" Source="{DynamicResource Refresh}" ToolTip="Refresh all process"/>
-                </Button>
+                <Separator/>
             </ToolBar>
         </ToolBarTray>
 
@@ -48,9 +42,15 @@
             <my:AutoCompleteBox Name="tbxFilter" Background="Transparent" Populating="autoCompleteBox1_Populating" TextChanged="tbxFilter_TextChanged"/>
         </Grid>
 
-        <ListView x:Name="lvProcesses" ItemsSource="{Binding Processes}" 
-                   util:GridViewSort.AutoSort="True"
-                  HorizontalContentAlignment="Stretch" MouseDoubleClick="lvProcesses_MouseDoubleClick">
+        <ListView x:Name="lvProcesses" 
+                  VirtualizingPanel.IsVirtualizing="True" 
+                  VirtualizingStackPanel.VirtualizationMode="Recycling"
+                  ScrollViewer.IsDeferredScrollingEnabled ="True"
+                  ItemsSource="{Binding Processes}"  
+                  util:GridViewSort.AutoSort="True"
+                  HorizontalContentAlignment="Stretch"
+                  MouseDoubleClick="lvProcesses_MouseDoubleClick">
+            
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem x:Name="cmiAttachOrDetach" Header="[Attach Or Detach]" Click="MenuItem_Click" Loaded="MenuItem_Loaded"/>

@@ -198,7 +198,6 @@
     <None Include="Resources\Images.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\view-refresh_32x32.png" />
     <Resource Include="Resources\debugger_32x32.png" />
     <Content Include="Resources\2013-03-13_003714.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
