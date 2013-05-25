@@ -135,6 +135,11 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -182,6 +187,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
@@ -211,6 +220,7 @@
     <Resource Include="Resources\debugger_32x32.png" />
     <Resource Include="Resources\appbar.bug.png" />
     <Resource Include="Resources\appbar.bug.remove.png" />
+    <Resource Include="Resources\appbar.close.png" />
     <Content Include="Resources\Package.ico" />
   </ItemGroup>
   <ItemGroup>

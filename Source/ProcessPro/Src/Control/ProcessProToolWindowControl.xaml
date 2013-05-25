@@ -59,7 +59,7 @@
                   VirtualizingPanel.IsVirtualizing="True" 
                   VirtualizingStackPanel.VirtualizationMode="Recycling"
                   ScrollViewer.IsDeferredScrollingEnabled ="True"
-                  ItemsSource="{Binding Processes}"  
+                  ItemsSource="{Binding Processes, IsAsync='True'}"  
                   util:GridViewSort.AutoSort="True"
                   HorizontalContentAlignment="Stretch"
                   MouseDoubleClick="lvProcesses_MouseDoubleClick">
