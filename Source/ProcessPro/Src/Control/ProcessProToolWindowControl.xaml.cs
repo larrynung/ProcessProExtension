@@ -273,5 +273,15 @@ namespace LevelUp.ProcessPro
 		{
 			DetachSelectedProcess();
 		}
+
+		private void Button_Click_4(object sender, RoutedEventArgs e)
+		{
+			ProcessController.Instance.AttachProcess("w3wp.exe");
+		}
+
+		private void Button_Click_5(object sender, RoutedEventArgs e)
+		{
+			ProcessController.Instance.AttachProcess("iisexpress.exe");
+		}
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using EnvDTE;
 using Microsoft.VisualStudio.Shell;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Threading;
@@ -130,6 +131,19 @@ namespace LevelUp.ProcessPro
 			dte.Debugger.DetachAll();
 		}
 
+		public void AttachProcess(string processName)
+		{
+			AttachProcess(System.Diagnostics.Process.GetProcessesByName(processName).Select(process => process.Id));
+		}
+
+		public void AttachProcess(IEnumerable<int> processIDs)
+		{
+			foreach (var processID in processIDs)
+			{
+				AttachProcess(processID);
+			}
+		}
+
 		public void AttachProcess(int processID)
 		{
 			if (processID == 0)
@@ -144,8 +158,6 @@ namespace LevelUp.ProcessPro
 				if (process.ProcessID == processID)
 				{
 					process.Attach();
-
-					//Processes.Single(p => p.ID == processID).Update();
 					return;
 				}
 			}

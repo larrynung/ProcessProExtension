@@ -8,7 +8,7 @@
              xmlns:local="clr-namespace:WaterMarkTextBox"
              xmlns:properties="clr-namespace:LevelUp.ProcessPro.Properties"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300"
+             d:DesignHeight="300"
               DataContext="{Binding RelativeSource={RelativeSource Self}}"
              Name="MyToolWindow" Loaded="MyToolWindow_Loaded">
     <UserControl.Resources>
@@ -23,90 +23,102 @@
         <BitmapImage x:Key="SelectAll" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="/ProcessPro;component/Resources/appbar.list.check.png"/>
         <BitmapImage x:Key="Attach" UriSource="/ProcessPro;component/Resources/appbar.bug.png"/>
         <BitmapImage x:Key="Detach" UriSource="/ProcessPro;component/Resources/appbar.bug.remove.png"/>
+        <BitmapImage x:Key="Kill" UriSource="/ProcessPro;component/Resources/appbar.close.png"/>
     </UserControl.Resources>
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
             <ToolBar>
-                <Button PreviewMouseLeftButtonDown="Button_PreviewMouseLeftButtonDown" PreviewMouseUp="Button_PreviewMouseUp">
-                    <Image x:Name="imgArrow" Height="28" Width="28" ToolTip="Attach to specified process" Source="{DynamicResource Arrow}"/>
-                </Button>
+					<Button PreviewMouseLeftButtonDown="Button_PreviewMouseLeftButtonDown" PreviewMouseUp="Button_PreviewMouseUp"  Margin="36,0,0,0">
+        			<Image x:Name="imgArrow" Height="28" Width="28" ToolTip="Attach to specified process" Source="{DynamicResource Arrow}"/>
+        		</Button>
+        		<Separator/>
+                <Label Content="Quic Attach:" VerticalContentAlignment="Center"/>
+                <ComboBox SelectedIndex="0" Width="100">
+                	<Button Content="IIS" Click="Button_Click_4" BorderBrush="{x:Null}" Background="{x:Null}" Width="100" HorizontalContentAlignment="Left"/>
+                	<Button Content="IIS Express" Click="Button_Click_5" BorderBrush="{x:Null}" Background="{x:Null}" Width="100" HorizontalContentAlignment="Left"/>
+                </ComboBox>
+            </ToolBar>
+        </ToolBarTray>
+        <ToolBarTray IsLocked="True" Orientation="Vertical">
+        	<ToolBar>
+        		<Button Click="Button_Click">
+        			<Image Height="32" Width="32" ToolTip="Select all processes" Source="{DynamicResource SelectAll}"/>
+        		</Button>
+        		<Separator/>
+        		<Button Click="Button_Click_1">
+        			<Image Height="32" Width="32" ToolTip="Attach selected processes" Source="{DynamicResource Attach}"/>
+        		</Button>
+        		<Button Click="Button_Click_3">
+        			<Image Height="32" Width="32" ToolTip="Detach selected processes" Source="{DynamicResource Detach}"/>
+        		</Button>
                 <Separator/>
-                <Button Click="Button_Click">
-                    <Image Height="32" Width="32" ToolTip="Select all processes" Source="{DynamicResource SelectAll}"/>
-                </Button>
-                <Separator/>
-                <Button Click="Button_Click_1">
-                    <Image Height="32" Width="32" ToolTip="Attach selected processes" Source="{DynamicResource Attach}"/>
-                </Button>
-                <Button Click="Button_Click_3">
-                    <Image Height="32" Width="32" ToolTip="Detach selected processes" Source="{DynamicResource Detach}"/>
+                <Button Click="Button_Click_2">
+                    <Image Height="32" Width="32" ToolTip="Kill selected processes" Source="{DynamicResource Kill}"/>
                 </Button>
             </ToolBar>
         </ToolBarTray>
-
-        <Grid DockPanel.Dock="Top">
-            <TextBlock Margin="5,2" Text="Filter your processes" Foreground="LightGray">
-                <TextBlock.Visibility>
-                    <MultiBinding Converter="{StaticResource Helper}">
-                        <Binding ElementName="tbxFilter" Path="Text.IsEmpty" />
-                        <Binding ElementName="tbxFilter" Path="IsFocused" />
-                    </MultiBinding>
-                </TextBlock.Visibility>
-            </TextBlock>
-            <my:AutoCompleteBox 
-                Name="tbxFilter" 
-                Text="{Binding Source={x:Static properties:Settings.Default}, Path=FilterKeyWord, Mode=TwoWay}"
-                Background="Transparent" 
-                Populating="autoCompleteBox1_Populating" 
-                TextChanged="tbxFilter_TextChanged"/>
+        <Grid  DockPanel.Dock="Top">
+        	<TextBlock Margin="5,2" Text="Filter your processes" Foreground="LightGray">
+        		<TextBlock.Visibility>
+        			<MultiBinding Converter="{StaticResource Helper}">
+        				<Binding ElementName="tbxFilter" Path="Text.IsEmpty" />
+        				<Binding ElementName="tbxFilter" Path="IsFocused" />
+        			</MultiBinding>
+        		</TextBlock.Visibility>
+        	</TextBlock>
+        	<my:AutoCompleteBox 
+        		x:Name="tbxFilter" 
+        		Text="{Binding FilterKeyWord, Mode=TwoWay, Source={x:Static properties:Settings.Default}}"
+        		Background="Transparent" 
+        		Populating="autoCompleteBox1_Populating" 
+        		TextChanged="tbxFilter_TextChanged"/>
         </Grid>
-
         <ListView x:Name="lvProcesses" 
-                  VirtualizingPanel.IsVirtualizing="True" 
-                  VirtualizingStackPanel.VirtualizationMode="Recycling"
-                  ScrollViewer.IsDeferredScrollingEnabled ="True"
-                  ItemsSource="{Binding Processes, IsAsync='True'}"  
-                  util:GridViewSort.AutoSort="True"
-                  HorizontalContentAlignment="Stretch"
-                  MouseDoubleClick="lvProcesses_MouseDoubleClick">
+        	VirtualizingPanel.IsVirtualizing="True" 
+        	VirtualizingPanel.VirtualizationMode="Recycling"
+        	ScrollViewer.IsDeferredScrollingEnabled ="True"
+        	ItemsSource="{Binding Processes, IsAsync=True}"  
+        	util:GridViewSort.AutoSort="True"
+        	HorizontalContentAlignment="Stretch"
+        	MouseDoubleClick="lvProcesses_MouseDoubleClick" DockPanel.Dock="Top">
 
-            <ListView.ContextMenu>
-                <ContextMenu>
-                    <MenuItem x:Name="cmiAttachOrDetach" Header="[Attach Or Detach]" Click="MenuItem_Click" Loaded="MenuItem_Loaded"/>
-                    <MenuItem x:Name="cmiKill" Header="Kill" Click="Button_Click_2"/>
-                    <Separator x:Name="cmSeperater1"/>
-                    <MenuItem x:Name="cmdSellectAll" Header="Select All" Click="cmdSellectAll_Click"/>
-                    <Separator x:Name="cmSeperater2"/>
-                    <MenuItem x:Name="cmDetail" Header="Detail" Click="MenuItem_Click_1"/>
-                </ContextMenu>
-            </ListView.ContextMenu>
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Width="30">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Image Width="16" Height="16">
-                                    <Image.Style>
-                                        <Style TargetType="{x:Type Image}">
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Attached}" Value="True">
-                                                    <Setter Property="Source" Value="{DynamicResource Debug}"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Image.Style>
-                                </Image>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Process" Width="150" DisplayMemberBinding="{Binding Name}" util:GridViewSort.PropertyName="Name"/>
-                    <GridViewColumn Header="ID" Width="40" DisplayMemberBinding="{Binding ID}" util:GridViewSort.PropertyName="ID"/>
-                    <GridViewColumn Header="CPU" Width="40" DisplayMemberBinding="{Binding CPU}" util:GridViewSort.PropertyName="CPU"/>
-                    <GridViewColumn Header="ThreadCount" Width="80" DisplayMemberBinding="{Binding ThreadCount}" util:GridViewSort.PropertyName="ThreadCount"/>
-                    <GridViewColumn Header="Title" Width="200" DisplayMemberBinding="{Binding Title}" util:GridViewSort.PropertyName="Title"/>
-                    <GridViewColumn Header="UserName" Width="150" DisplayMemberBinding="{Binding Owner}" util:GridViewSort.PropertyName="UserName"/>
-                </GridView>
-            </ListView.View>
+        	<ListView.ContextMenu>
+        		<ContextMenu>
+        			<MenuItem x:Name="cmiAttachOrDetach" Header="[Attach Or Detach]" Click="MenuItem_Click" Loaded="MenuItem_Loaded"/>
+        			<MenuItem x:Name="cmiKill" Header="Kill" Click="Button_Click_2"/>
+        			<Separator x:Name="cmSeperater1"/>
+        			<MenuItem x:Name="cmdSellectAll" Header="Select All" Click="cmdSellectAll_Click"/>
+        			<Separator x:Name="cmSeperater2"/>
+        			<MenuItem x:Name="cmDetail" Header="Detail" Click="MenuItem_Click_1"/>
+        		</ContextMenu>
+        	</ListView.ContextMenu>
+        	<ListView.View>
+        		<GridView>
+        			<GridViewColumn Width="30">
+        				<GridViewColumn.CellTemplate>
+        					<DataTemplate>
+        						<Image Width="16" Height="16">
+        							<Image.Style>
+        								<Style TargetType="{x:Type Image}">
+        									<Style.Triggers>
+        										<DataTrigger Binding="{Binding Attached}" Value="True">
+        											<Setter Property="Source" Value="{DynamicResource Debug}"/>
+        										</DataTrigger>
+        									</Style.Triggers>
+        								</Style>
+        							</Image.Style>
+        						</Image>
+        					</DataTemplate>
+        				</GridViewColumn.CellTemplate>
+        			</GridViewColumn>
+        			<GridViewColumn Header="Process" Width="150" DisplayMemberBinding="{Binding Name}" util:GridViewSort.PropertyName="Name"/>
+        			<GridViewColumn Header="ID" Width="40" DisplayMemberBinding="{Binding ID}" util:GridViewSort.PropertyName="ID"/>
+        			<GridViewColumn Header="CPU" Width="40" DisplayMemberBinding="{Binding CPU}" util:GridViewSort.PropertyName="CPU"/>
+        			<GridViewColumn Header="ThreadCount" Width="80" DisplayMemberBinding="{Binding ThreadCount}" util:GridViewSort.PropertyName="ThreadCount"/>
+        			<GridViewColumn Header="Title" Width="200" DisplayMemberBinding="{Binding Title}" util:GridViewSort.PropertyName="Title"/>
+        			<GridViewColumn Header="UserName" Width="150" DisplayMemberBinding="{Binding Owner}" util:GridViewSort.PropertyName="UserName"/>
+        		</GridView>
+        	</ListView.View>
         </ListView>
     </DockPanel>
 </UserControl>
