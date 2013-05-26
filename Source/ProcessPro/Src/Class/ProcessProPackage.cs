@@ -86,6 +86,12 @@ namespace LevelUp.ProcessPro
 				mcs.AddCommand(menuToolWin);
 			}
 		}
+
+		protected override int QueryClose(out bool canClose)
+		{
+			Properties.Settings.Default.Save();
+			return base.QueryClose(out canClose);
+		}
 		#endregion
 
 	}

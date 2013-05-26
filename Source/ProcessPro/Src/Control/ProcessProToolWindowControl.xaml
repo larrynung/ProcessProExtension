@@ -6,6 +6,7 @@
              xmlns:util="clr-namespace:Wpf.Util"
              xmlns:my="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
              xmlns:local="clr-namespace:WaterMarkTextBox"
+             xmlns:properties="clr-namespace:LevelUp.ProcessPro.Properties"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
               DataContext="{Binding RelativeSource={RelativeSource Self}}"
@@ -52,7 +53,12 @@
                     </MultiBinding>
                 </TextBlock.Visibility>
             </TextBlock>
-            <my:AutoCompleteBox Name="tbxFilter" Background="Transparent" Populating="autoCompleteBox1_Populating" TextChanged="tbxFilter_TextChanged"/>
+            <my:AutoCompleteBox 
+                Name="tbxFilter" 
+                Text="{Binding Source={x:Static properties:Settings.Default}, Path=FilterKeyWord, Mode=TwoWay}"
+                Background="Transparent" 
+                Populating="autoCompleteBox1_Populating" 
+                TextChanged="tbxFilter_TextChanged"/>
         </Grid>
 
         <ListView x:Name="lvProcesses" 
