@@ -6,7 +6,7 @@
     <Description xml:space="preserve">Help developer attach to and manage running process easily and quickly</Description>
     <MoreInfo>http://www.dotblogs.com.tw/larrynung</MoreInfo>
     <Icon>Resources\1306142432_running_process.ico</Icon>
-    <PreviewImage>Resources\2013-03-13_003714.jpg</PreviewImage>
+    <PreviewImage>Preview.jpg</PreviewImage>
     <Tags>Debugger, Attach, Process</Tags>
   </Metadata>
   <Installation InstalledByMsi="false">
