@@ -209,10 +209,7 @@
     <None Include="Resources\Images.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\1306142432_running_process.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
+    <Resource Include="Resources\1306142432_running_process.ico" />
     <Resource Include="Resources\arrow.png" />
     <Resource Include="Resources\appbar.list.check.png" />
     <Resource Include="Resources\debugger_32x32.png" />
